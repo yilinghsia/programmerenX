@@ -21,10 +21,11 @@ if (!isset($_SESSION['loginnaam'])) {
                 <li class='last'><a href='create_maandoverzicht.php'>Maand overzicht</a></li>
             </ul>
             <?php
-            echo "Welkom thuis " . $_SESSION['loginnaam'] . "!";
+            echo "Welkom thuis <a href='gebruikerGegevens.php'>" .  $_SESSION['loginnaam'] . "</a> !";
             echo"</br>";
             echo "<a href='logOut.php'>Log uit</a>";
             ?>
         </div>
+        <div id="content"></div>
     </body>
 </html>

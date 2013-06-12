@@ -3,7 +3,6 @@ header( "refresh:4;url=index.php" );
 require_once "Bootstrap.php";
 require 'src/Persoon.php';
 
-//$newUsername = $argv[1];
 
 $persoon = new Persoon();
 $persoon->setLoginnaam($_POST['loginnaam']);

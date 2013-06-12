@@ -18,15 +18,15 @@ if (!isset($_SESSION['loginnaam'])) {
                 <li class="active"><a href='create_bericht.php'>Berichten</a></li>
                 <li><a href='create_aanwezig.php'>Wie is er thuis?</a></li>
                 <li><a href='create_etenstijd.php'>Etenstijd</a></li>
-                <li class='last'><a href='create_maandoverzicht.php'>Maand overzicht</a></li>
+                <li><a href='create_maandoverzicht.php'>Maand overzicht</a></li>
             </ul>
             <?php
-            echo "Welkom thuis " . $_SESSION['loginnaam'] . "!";
+            echo "Welkom thuis <a href='gebruikerGegevens.php'>" . $_SESSION['loginnaam'] . "</a> !";
             echo"</br>";
             echo "<a href='logOut.php'>Log uit</a>";
             ?>
         </div>
-        <div id="Bericht">
+        <div id="content">
             <table>
                 <tr>
                     <td>
