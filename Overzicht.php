@@ -14,10 +14,10 @@ if (!isset($_SESSION['loginnaam'])) {
     <body>
         <div id='kalender'>
             <ul>
-                <li class='active'><a href='#'>Dag overzicht</a></li>
+                <li class='active'><a href='overzicht.php'>Dag overzicht</a></li>
                 <li><a href='create_bericht.php'>Berichten</a></li>
                 <li><a href='create_aanwezig.php'>Wie is er thuis?</a></li>
-                <li><a href=''>Etenstijd</a></li>
+                <li><a href='create_etenstijd.php'>Etenstijd</a></li>
                 <li class='last'><a href='create_maandoverzicht.php'>Maand overzicht</a></li>
             </ul>
             <?php

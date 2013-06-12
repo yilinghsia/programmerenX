@@ -21,11 +21,12 @@ class Bericht {
     /** @Column(type="text", length=500, nullable=false)* */
     protected $Bericht;
 
-    /** @OneToMany(targetEntity="Persoon",  mappedBy="id")@Column(type="integer",  nullable=false) * */
+    /** @ManyToOne(targetEntity="Persoon",  inversedBy="id")@Column(type="integer",  nullable=false) * */
     protected $Verzender_id;
 
-    /** @OneToMany(targetEntity="Persoon",  mappedBy="id")@Column(type="integer",  nullable=false) * */
+    /** @ManyToOne(targetEntity="Persoon",  inversedBy="id")@Column(type="integer",  nullable=false) * */
     protected $Ontvanger_id;
+    
     public function getId() {
         return $this->id;
     }
@@ -56,6 +57,21 @@ class Bericht {
 
     public function setBericht($Bericht) {
         $this->Bericht = $Bericht;
+    }
+    public function getVerzender_id() {
+        return $this->Verzender_id;
+    }
+
+    public function setVerzender_id($Verzender_id) {
+        $this->Verzender_id = $Verzender_id;
+    }
+
+    public function getOntvanger_id() {
+        return $this->Ontvanger_id;
+    }
+
+    public function setOntvanger_id($Ontvanger_id) {
+        $this->Ontvanger_id = $Ontvanger_id;
     }
 
 

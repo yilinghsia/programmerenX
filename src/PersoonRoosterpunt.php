@@ -67,6 +67,14 @@ class PersoonRoosterpunt {
         $this->Aanwezig = $Aanwezig;
     }
 
+    public function getPersoon_id() {
+        return $this->Persoon_id;
+    }
+
+    public function setPersoon_id($Persoon_id) {
+        $this->Persoon_id = $Persoon_id;
+    }
+
 
 }
 

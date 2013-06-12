@@ -21,7 +21,7 @@ class Huis {
     /** @Column(type="date",nullable=false)* */
     protected $Huurdatum;
 
-    /** @ManyToOne(targetEntity="Persoon",  inversedBy="id")@Column(type="integer",  nullable=false) **/
+    /** @OneToMany(targetEntity="Persoon",  mappedBy="id")@Column(type="integer",  nullable=false) **/
     protected $Persoon_id;
 
     //getters and setters
@@ -52,6 +52,14 @@ class Huis {
     public function setHuurdatum($Huurdatum) {
         $this->Huurdatum = $Huurdatum;
     }
+    public function getPersoon_id() {
+        return $this->Persoon_id;
+    }
+
+    public function setPersoon_id($Persoon_id) {
+        $this->Persoon_id = $Persoon_id;
+    }
+
 
 }
 

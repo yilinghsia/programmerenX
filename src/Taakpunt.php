@@ -26,7 +26,7 @@ class Taakpunt {
     /** @Column(type="boolean", nullable=false)* */
     protected $Voltooiing;
 
-    /** @OneToMany(targetEntity="Persoon", mappedBy="id" ) @Column(type="integer",  nullable=false)**/
+    /** @ManyToOne(targetEntity="Persoon", inversedBy="id" ) @Column(type="integer",  nullable=false)**/
     protected $Persoon_id;
 
     public function getId() {
@@ -75,6 +75,14 @@ class Taakpunt {
 
     public function setVoltooiing($Voltooiing) {
         $this->Voltooiing = $Voltooiing;
+    }
+
+    public function getPersoon_id() {
+        return $this->Persoon_id;
+    }
+
+    public function setPersoon_id($Persoon_id) {
+        $this->Persoon_id = $Persoon_id;
     }
 
 

@@ -17,7 +17,7 @@ if (!isset($_SESSION['loginnaam'])) {
                 <li><a href='overzicht.php'>Dag overzicht</a></li>
                 <li class="active"><a href='create_bericht.php'>Berichten</a></li>
                 <li><a href='create_aanwezig.php'>Wie is er thuis?</a></li>
-                <li><a href=''>Etenstijd</a></li>
+                <li><a href='create_etenstijd.php'>Etenstijd</a></li>
                 <li class='last'><a href='create_maandoverzicht.php'>Maand overzicht</a></li>
             </ul>
             <?php
@@ -30,6 +30,11 @@ if (!isset($_SESSION['loginnaam'])) {
             <table>
                 <tr>
                     <td>
+                        <input type="text" class="rounded" placeholder="Naar"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <input type="text" class="rounded" placeholder="Onderwerp"/>
                     </td>
                 </tr>
@@ -40,7 +45,7 @@ if (!isset($_SESSION['loginnaam'])) {
                     <td>
                 </tr>
             </table>
+            <input type="submit" value="Verstuur"/>
         </div>
-        <input type="submit" value="Verstuur"/>
     </body>
 </html>

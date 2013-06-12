@@ -40,6 +40,12 @@ input{
     border: 1px solid gray;
     padding:8px;
 }
+
+#Bericht{
+    margin-left: 30px;
+    margin-top: 50px;
+}
+
 .rounded{
     border-radius: 20px ;
 }

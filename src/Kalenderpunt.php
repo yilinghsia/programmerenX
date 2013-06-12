@@ -24,8 +24,9 @@ class Kalenderpunt {
     /** @Column(type="string", length=45, nullable=false)* */
     protected $Soort;
 
-    /** @OneToMany(targetEntity="Persoon", mappedBy="id")@Column(type="integer",  nullable=false) */
+    /** @ManyToOne(targetEntity="Persoon", inversedBy="id")@Column(type="integer",  nullable=false) */
     protected $Persoon_id;
+    
     public function getId() {
         return $this->id;
     }
@@ -65,6 +66,14 @@ class Kalenderpunt {
     public function setSoort($Soort) {
         $this->Soort = $Soort;
     }
+    public function getPersoon_id() {
+        return $this->Persoon_id;
+    }
+
+    public function setPersoon_id($Persoon_id) {
+        $this->Persoon_id = $Persoon_id;
+    }
+
 
 
 }

@@ -18,10 +18,10 @@ class Transactie {
     /** @Column(type="datetime", length=45, nullable=false)* */
     protected $Datum;
 
-    /** @OneToMany(targetEntity="Persoon", mappedBy="id")@Column(type="integer",  nullable=false) */
+    /** @ManyToOne(targetEntity="Persoon", inversedBy="id")@Column(type="integer",  nullable=false) */
     protected $Verzender_id;
     
-        /** @OneToMany(targetEntity="Persoon", mappedBy="id")@Column(type="integer",  nullable=false) */
+        /** @ManyToOne(targetEntity="Persoon", inversedBy="id")@Column(type="integer",  nullable=false) */
     protected $Ontvanger_id;
 
     public function getId() {
@@ -47,6 +47,22 @@ class Transactie {
     public function setDatum($Datum) {
         $this->Datum = $Datum;
     }
+    public function getVerzender_id() {
+        return $this->Verzender_id;
+    }
+
+    public function setVerzender_id($Verzender_id) {
+        $this->Verzender_id = $Verzender_id;
+    }
+
+    public function getOntvanger_id() {
+        return $this->Ontvanger_id;
+    }
+
+    public function setOntvanger_id($Ontvanger_id) {
+        $this->Ontvanger_id = $Ontvanger_id;
+    }
+
 
 
 }

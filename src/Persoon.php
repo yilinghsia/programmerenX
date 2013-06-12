@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @author Yi Ling
@@ -46,7 +47,7 @@ class Persoon {
     /** @Column(type="string", length=125, nullable=true)* */
     protected $Eetgewoonte;
 
-    /** @OneToMany(targetEntity="Huis",  mappedBy="id")@Column(type="integer",  nullable=false) * */
+    /** @ManyToOne(targetEntity="Huis",  inversedBy="id")@Column(type="integer",  nullable=false) * */
     protected $Huis_Id;
 
     /** @ManyToOne(targetEntity="Transactie",  inversedBy="id")@Column(type="integer",  nullable=false) * */
@@ -147,15 +148,6 @@ class Persoon {
 
     public function setWachtwoord($Wachtwoord) {
         $this->Wachtwoord = $Wachtwoord;
-    }
-
-    //functions
-    public function wijzigGegevens() {
-        
-    }
-
-    public function verwijderAccount() {
-        
     }
 
 }
