@@ -12,13 +12,13 @@ class Bericht {
     /** @Id @Column(type="integer") @GeneratedValue* */
     protected $id;
 
-    /** @Column(type="datetime",nullable=false)* */
+    /** @Column(type="string",nullable=false)* */
     protected $Datum;
 
     /** @Column(type="string", length=45, nullable=false)* */
     protected $Onderwerp;
 
-    /** @Column(type="text", length=500, nullable=false)* */
+    /** @Column(type="text",  nullable=false)* */
     protected $Bericht;
 
     /** @ManyToOne(targetEntity="Persoon",  inversedBy="id")@Column(type="integer",  nullable=false) * */

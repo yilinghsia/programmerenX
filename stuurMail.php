@@ -1,6 +1,7 @@
 <?php
-header( "refresh:4;url=gebruikerGegevens.php" );
+
 require_once "Bootstrap.php";
+require 'src/Bericht.php';
 require 'src/Persoon.php';
 session_start();
 if (!isset($_SESSION['loginnaam'])) {
@@ -14,16 +15,16 @@ $query = $entityManager->createQuery($dql)
 foreach ($query AS $gebruiker) {
     $gebruikerId = $gebruiker->getId();
 }
-
 $data=$entityManager->getRepository('Persoon')->find($gebruikerId);
-$data->setWachtwoord($_POST['wachtwoord']);
-$data->setNaam($_POST['voornaam']);
-$data->setAchternaam($_POST['achternaam']);
-$data->setStudie($_POST['studie']);
-$data->setStudiejaar($_POST['studiejaar']);
-$data->setBijbaan($_POST['bijbaan']);
-$data->setEetgewoonte($_POST['eetgewoonte']);
 
+$currentDate = date("Y-m-d");
+
+$bericht = new Bericht();
+$bericht->setDatum($currentDate);
+$bericht->setOnderwerp($_POST['onderwerp']);
+$bericht->setBericht($_POST['berichtje']);
+$bericht->setVerzender_id($data);
+$entityManager->persist($bericht);
 $entityManager->flush();
-echo"De wijzigingen zijn gelukt! Je wordt binnen enkele seconden weer teruggebracht";
-?>
+echo 'Berichtje is verstuurd';
+

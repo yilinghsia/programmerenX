@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <?php
+require_once "Bootstrap.php";
+require 'src/Persoon.php';
+require 'src/Huis.php';
+
 session_start();
 if (!isset($_SESSION['loginnaam'])) {
     header("location:index.php");
@@ -27,25 +31,53 @@ if (!isset($_SESSION['loginnaam'])) {
             ?>
         </div>
         <div id="content">
-            <table>
-                <tr>
-                    <td>
-                        <input type="text" class="rounded" placeholder="Naar"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" class="rounded" placeholder="Onderwerp"/>
-                    </td>
-                </tr>
+            <?php
+            $naamInSession = $_SESSION['loginnaam'];
+            $dql = "SELECT g FROM Persoon g WHERE g.Loginnaam='$naamInSession'";
+            $query = $entityManager->createQuery($dql)
+                    ->getResult();
 
-                <tr>
-                    <td>
-                        <textarea id="txtArea" class="rounded" rows="15" cols="70"></textarea>
-                    <td>
-                </tr>
-            </table>
-            <input type="submit" value="Verstuur"/>
+            foreach ($query AS $gebruiker) {
+                $gebruikerId = $gebruiker->getId();
+            }
+            $data = $entityManager->getRepository('Persoon')->find($gebruikerId);
+            $huisId = $data->getHuis_Id();
+
+            $dql2 = "SELECT a FROM Persoon a JOIN a.Huis_Id b WHERE b.id='1'";
+            $query2 = $entityManager->createQuery($dql2)
+                    ->getResult();
+            ?>
+            <form method='post' action='stuurMail.php'>
+                <table>
+                    <tr>
+                        <td>Stuur een berichtje naar:
+                            <select>
+                                <?php
+                                foreach ($query2 as $bewoners) {
+                                    echo'<option value="' . $bewoners->getId() . '">'
+                                    . $bewoners->getNaam();
+                                    echo '</option>';
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" class="rounded" name='onderwerp' placeholder="Onderwerp"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <textarea class="rounded" name='berichtje' rows="15" cols="70"></textarea>
+                        <td>
+                    </tr>
+                    <tr><td>
+                    <input type="submit" value="Verstuur bericht"/></td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </body>
 </html>

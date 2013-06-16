@@ -21,8 +21,8 @@ class Huis {
     /** @Column(type="date",nullable=false)* */
     protected $Huurdatum;
 
-    /** @OneToMany(targetEntity="Persoon",  mappedBy="id")@Column(type="integer",  nullable=false) **/
-    protected $Persoon_id;
+    /** @OneToMany(targetEntity="Persoon",  mappedBy="Huis_Id")@Column(type="integer",  nullable=false) **/
+    protected $Bewoner=null;
 
     //getters and setters
     public function getId() {
@@ -52,15 +52,9 @@ class Huis {
     public function setHuurdatum($Huurdatum) {
         $this->Huurdatum = $Huurdatum;
     }
-    public function getPersoon_id() {
-        return $this->Persoon_id;
+    public function addBewoner($bewoner) {
+        $this->Bewoner = $bewoner;
     }
-
-    public function setPersoon_id($Persoon_id) {
-        $this->Persoon_id = $Persoon_id;
-    }
-
-
 }
 
 ?>

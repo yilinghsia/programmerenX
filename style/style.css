@@ -42,11 +42,12 @@ input{
 }
 
 #content{
-    margin-left: 30px;
+    margin-left: 50px;
     margin-top: 50px;
 }
 
 .rounded{
+    padding-left: 10px;
     border-radius: 20px ;
 }
 /* calendar */
