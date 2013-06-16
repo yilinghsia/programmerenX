@@ -13,20 +13,9 @@ if (!isset($_SESSION['loginnaam'])) {
         <title>Studentenhuis</title>
     </head>
     <body>
-        <div id='kalender'>
-            <ul>
-                <li><a href='overzicht.php'>Dag overzicht</a></li>
-                <li><a href='create_bericht.php'>Berichten</a></li>
-                <li><a href='create_aanwezig.php'>Wie is er thuis?</a></li>
-                <li><a href='create_etenstijd.php'>Etenstijd</a></li>
-                <li class='last'><a href='create_maandoverzicht.php'>Maand overzicht</a></li>
-            </ul>
-            <?php
-            echo "Welkom thuis <a href='wijzigGegevens.php'>" . $_SESSION['loginnaam'] . "</a> !";
-            echo"</br>";
-            echo "<a href='logOut.php'>Log uit</a>";
-            ?>
-        </div>
+        <?php
+        include('navigatieMenu.php');
+        ?>
         <div id="content">
             <h2>Wijzig mijn gegevens</h2><br/>
             <?php
@@ -49,7 +38,7 @@ if (!isset($_SESSION['loginnaam'])) {
                 }
             }
             ?>
- 
+
             <form method='post' action='wijzigGegevens.php'>
                 <table>
                     <tr>

@@ -1,5 +1,4 @@
 <?php
-
 require_once "Bootstrap.php";
 require 'src/Bericht.php';
 require 'src/Persoon.php';
@@ -17,6 +16,10 @@ foreach ($query AS $gebruiker) {
 }
 $data=$entityManager->getRepository('Persoon')->find($gebruikerId);
 
+$ontvangerId=$_POST['ontvanger'];
+$ontvangerBericht=$entityManager->getRepository('Persoon')->find($ontvangerId);
+
+
 $currentDate = date("Y-m-d");
 
 $bericht = new Bericht();
@@ -24,7 +27,8 @@ $bericht->setDatum($currentDate);
 $bericht->setOnderwerp($_POST['onderwerp']);
 $bericht->setBericht($_POST['berichtje']);
 $bericht->setVerzender_id($data);
+$bericht->setOntvanger_id($ontvangerBericht);
 $entityManager->persist($bericht);
 $entityManager->flush();
-echo 'Berichtje is verstuurd';
+echo 'Berichtje is verstuurd!';
 
