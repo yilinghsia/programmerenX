@@ -30,9 +30,9 @@ if (!isset($_SESSION['loginnaam'])) {
                 $gebruikerId = $gebruiker->getId();
             }
             $data = $entityManager->getRepository('Persoon')->find($gebruikerId);
-            $huisId = $data->getHuis_Id();
+            $huisId = $data->getHuis_Id()->getId();
 
-            $dql2 = "SELECT a FROM Persoon a JOIN a.Huis_Id b WHERE b.id='1'";
+            $dql2 = "SELECT a FROM Persoon a JOIN a.Huis_Id b WHERE b.id='$huisId'";
             $query2 = $entityManager->createQuery($dql2)
                     ->getResult();
             ?>

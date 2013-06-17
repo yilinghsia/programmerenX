@@ -88,4 +88,5 @@ if (!isset($_SESSION['loginnaam'])) {
             echo '<h2>Juni 2013</h2>';
             echo draw_calendar(6, 2013);
             ?>
+       Maak nieuwe punt aan
         </div>  

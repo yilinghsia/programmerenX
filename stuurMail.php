@@ -1,4 +1,5 @@
 <?php
+header( "refresh:4;url=inbox.php" );
 require_once "Bootstrap.php";
 require 'src/Bericht.php';
 require 'src/Persoon.php';
@@ -30,5 +31,5 @@ $bericht->setVerzender_id($data);
 $bericht->setOntvanger_id($ontvangerBericht);
 $entityManager->persist($bericht);
 $entityManager->flush();
-echo 'Berichtje is verstuurd!';
+echo 'Berichtje is verstuurd! Je wordt binnen een paar seconden terug gebracht';
 
