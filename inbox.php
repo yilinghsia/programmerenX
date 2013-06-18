@@ -27,8 +27,6 @@ if (!isset($_SESSION['loginnaam'])) {
             foreach ($query AS $gebruiker) {
                 $gebruikerId = $gebruiker->getId();
             }
-            //$data = $entityManager->getRepository('Persoon')->find($gebruikerId);
-
             $dqlMail = "SELECT b FROM Bericht b WHERE b.Ontvanger_id='$gebruikerId'";
             $queryMail = $entityManager->createQuery($dqlMail)
                     ->getResult();

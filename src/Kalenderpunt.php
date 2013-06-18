@@ -13,7 +13,7 @@ class Kalenderpunt {
     protected $id;
 
     /** @Column(type="datetime", nullable=false)* */
-    protected $Loginnaam;
+    protected $Datum;
 
     /** @Column(type="string", length=45, nullable=false)* */
     protected $Naam;

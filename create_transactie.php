@@ -36,11 +36,11 @@ if (!isset($_SESSION['loginnaam'])) {
             $query2 = $entityManager->createQuery($dql2)
                     ->getResult();
             ?>
-            <form method='post' action='stuurMail.php'>
+            <form method='post' action='verwerkTransactie.php'>
                 <table>
                     <tr>
-                        <td>Stuur een berichtje naar:
-                            <select name='ontvanger'>
+                        <td>Transactie aan/naar:</td>
+                            <td><select name='ontvanger'>
                                 <?php
                                 foreach ($query2 as $bewoners) {
                                     echo'<option value="' . $bewoners->getId() . '">'
@@ -52,18 +52,15 @@ if (!isset($_SESSION['loginnaam'])) {
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <input type="text" class="rounded" name='onderwerp' required placeholder="Onderwerp"/>
-                        </td>
+                        <td>Bedrag:</td>
+                        <td><input type="number"  name='bedrag' step='0.10' required /></td>
                     </tr>
-
                     <tr>
-                        <td>
-                            <textarea class="rounded" name='berichtje' rows="15" required cols="70"></textarea>
-                        <td>
+                        <td>Eventuele commentaar/details:</td>
+                        <td><input type='text' name="commentaar" placeholder='Bv: Graag binnen 3 dagen!' size='50'/><td>
                     </tr>
                     <tr><td>
-                            <input type="submit" value="Verstuur bericht"/></td>
+                            <input type="submit" value="Verstuur transactie"/></td>
                     </tr>
                 </table>
             </form>

@@ -15,9 +15,12 @@ class Transactie {
     /** @Column(type="decimal", nullable=false)* */
     protected $Bedrag;
 
-    /** @Column(type="datetime", length=45, nullable=false)* */
+    /** @Column(type="string", length=45, nullable=false)* */
     protected $Datum;
 
+    /** @Column(type="text",  nullable=true)* */
+    protected $Opmerking;
+    
     /** @ManyToOne(targetEntity="Persoon", inversedBy="id")@Column(type="integer",  nullable=false) */
     protected $Verzender_id;
     
@@ -47,7 +50,15 @@ class Transactie {
     public function setDatum($Datum) {
         $this->Datum = $Datum;
     }
-    public function getVerzender_id() {
+    public function getOpmerking() {
+        return $this->Opmerking;
+    }
+
+    public function setOpmerking($Opmerking) {
+        $this->Opmerking = $Opmerking;
+    }
+
+        public function getVerzender_id() {
         return $this->Verzender_id;
     }
 
