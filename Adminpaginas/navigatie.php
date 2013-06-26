@@ -1,6 +1,6 @@
         <div id='cssmenu'>
             <ul>
-                <li class='active'><a href='admin.php'><span>Dag overzicht</span></a></li>
+                <li class='active'><a href='admin.php'><span>Huis informatie</span></a></li>
                 <li class='has-sub'><a href='inbox.php'><span>Berichten</span></a>
                     <ul>
                         <li><a href='inbox.php'><span>Inbox</span></a></li>
@@ -14,5 +14,5 @@
 <?php
         echo "Welkom thuis <a href='gebruikerGegevens.php'>" . $_SESSION['loginnaam'] . "</a> !";
         echo"</br>";
-        echo "<a href='logOut.php'>Log uit</a>";
+        echo "<a href='../logOut.php'>Log uit</a>";
 ?>

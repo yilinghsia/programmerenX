@@ -18,7 +18,7 @@ class Huis {
     /** @Column(type="string", length=150, nullable=false)* */
     protected $Adres;
 
-    /** @Column(type="date",nullable=false)* */
+    /** @Column(type="string",nullable=false)* */
     protected $Huurdatum;
 
     /** @OneToMany(targetEntity="Persoon",  mappedBy="Huis_Id")@Column(type="integer",  nullable=false) **/

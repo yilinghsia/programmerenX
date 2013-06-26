@@ -18,12 +18,13 @@ include('session.php');
             <?php
             $gebruikerId = $_GET['id'];
             $data = $entityManager->getRepository('Persoon')->find($gebruikerId);
+            $id=$data->getId();
             $voornaam = $data->getNaam();
             $achternaam = $data->getAchternaam();
             $huurhoogte = $data->getHuurhoogte();
             $functierol = $data->getFunctierol();
             ?>
-            <form method='post' action='verwerkGebruiker.php'>
+            <form method="post" action="verwerkGebruiker.php">
                 <table width="100%">
                     <tr>
                         <td>Naam</td>
@@ -32,10 +33,11 @@ include('session.php');
                         <td>Functierol</td>
                     </tr>
                     <tr>
-                        <td><?php echo $voornaam; ?></td>
-                        <td><?php echo $achternaam; ?></td>
-                        <td><input type="text" placeholder="Bijv: 250" value="<?php echo $huurhoogte; ?>"></input></td>
-                        <td><input type="text" placeholder="Admin of leeg laten" value="<?php echo $functierol; ?>"></td>
+                        <td><input type="text" readonly name="voornaam" value="<?php echo $voornaam; ?>"</td>
+                        <td><input type="text" readonly  value="<?php echo $achternaam; ?>"</td>
+
+                        <td><input type="text" name="huurhoogte" placeholder="Bijv: 250" value="<?php echo $huurhoogte; ?>"></input></td>
+                        <td><input type="text" name="functierol" placeholder="Admin of leeg laten" value="<?php echo $functierol; ?>"></td>
                     </tr>
                     <td><input type="submit" name="submit" value="Opslaan"> </td>
                 </table>
