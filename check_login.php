@@ -1,4 +1,5 @@
 <?php
+
 require_once "Bootstrap.php";
 
 $loginnaam = $_POST['gebruikersnaam'];
@@ -8,12 +9,20 @@ $query = $entityManager->createQuery($dql)
         ->getResult();
 
 if ($query != NULL) {
-    foreach ($query AS $test) {
-        echo $test->getId();
-        session_start();
-        $_SESSION['loginnaam'] = $loginnaam;
-        $_SESSION['wachtwoord'] = $wachtwoord;
-        header("location:overzicht.php");
+    foreach ($query AS $inlogger) {
+        $functierol = $inlogger->getFunctierol();
+        if ($functierol == null) {
+            session_start();
+            $_SESSION['loginnaam'] = $loginnaam;
+            $_SESSION['functierol'] = $functierol;
+            header("location:overzicht.php");
+        }
+        else if ($functierol == "admin") {
+            session_start();
+            $_SESSION['loginnaam'] = $loginnaam;
+            $_SESSION['functierol'] = $functierol;
+            header("location:Adminpaginas/admin.php");
+        }
     }
 } else {
     echo "Verkeerde combinatie van gebruikersnaam/wachtwoord!";

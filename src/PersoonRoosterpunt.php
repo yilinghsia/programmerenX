@@ -12,7 +12,7 @@ class PersoonRoosterpunt {
     /** @Id @Column(type="integer") @GeneratedValue * */
     protected $id;
 
-    /** @Column(type="datetime", nullable=false)* */
+    /** @Column(type="string", nullable=false)* */
     protected $Datum;
 
     /** @Column(type="string", length=45, nullable=false)* */

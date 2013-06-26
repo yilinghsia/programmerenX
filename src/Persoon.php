@@ -89,8 +89,23 @@ class Persoon {
     public function setAchternaam($Achternaam) {
         $this->Achternaam = $Achternaam;
     }
+    public function getHuurhoogte() {
+        return $this->Huurhoogte;
+    }
 
-    public function getGeboortedatum() {
+    public function setHuurhoogte($Huurhoogte) {
+        $this->Huurhoogte = $Huurhoogte;
+    }
+
+    public function getFunctierol() {
+        return $this->Functierol;
+    }
+
+    public function setFunctierol($Functierol) {
+        $this->Functierol = $Functierol;
+    }
+
+        public function getGeboortedatum() {
         return $this->Geboortedatum;
     }
 
