@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <?php
+require "Bootstrap.php";
+require 'src/Kalenderpunt.php';
 session_start();
 if (!isset($_SESSION['loginnaam'])) {
     header("location:index.php");
@@ -17,12 +19,20 @@ if (!isset($_SESSION['loginnaam'])) {
         ?>
         <div id="content">
             <?php
-            /* draws a calendar */
+            $huidigeDag = date('Y-m-d');
+            $dql = "SELECT k FROM Kalenderpunt k WHERE k.Datum='$huidigeDag'";
+            $query = $entityManager->createQuery($dql)
+                    ->getResult();
+
+            foreach ($query AS $gebruiker) {
+                $gebruikerId = $gebruiker->getNaam();
+
+                echo $gebruikerId;
+            }
 
             function draw_calendar($month, $year) {
-
                 /* draw table */
-                $calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
+                $calendar = '<table cellpadding="0" cellspacing="5" class="calendar">';
 
                 /* table headings */
                 $headings = array('Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag');
@@ -44,14 +54,17 @@ if (!isset($_SESSION['loginnaam'])) {
                     $days_in_this_week++;
                 endfor;
 
+
                 /* keep going with days.... */
                 for ($list_day = 1; $list_day <= $days_in_month; $list_day++):
                     $calendar.= '<td class="calendar-day">';
                     /* add in the day number */
                     $calendar.= '<div class="day-number">' . $list_day . '</div>';
 
+
                     /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! * */
-                    $calendar.= str_repeat('<p> </p>', 2);
+
+                    $calendar.= str_repeat('<p></p>', 1);
 
                     $calendar.= '</td>';
                     if ($running_day == 6):
@@ -84,9 +97,11 @@ if (!isset($_SESSION['loginnaam'])) {
                 return $calendar;
             }
 
-            /* sample usages */
-            echo '<h2>Juni 2013</h2>';
-            echo draw_calendar(6, 2013);
+            $currentDate = date('F Y');
+            $maandnummer = date('m', strtotime($currentDate));
+            $jaarnummer = date('Y', strtotime($currentDate));
+            echo "<h2>" . $currentDate . "</h2>";
+            echo draw_calendar($maandnummer, $jaarnummer);
             ?>
-       Maak nieuwe punt aan
+            <a href="create_kalenderpunt.php"> Maak nieuwe punt aan</a>
         </div>  

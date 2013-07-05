@@ -31,7 +31,7 @@ if (!isset($_SESSION['loginnaam'])) {
             // timestamp from ISO week date format
             $ts = strtotime($year . 'W' . $week . $i);
             $datum = date("l d/m/Y ", $ts);
-            echo '<tr><td><input type="text" readonly name="datum[]" value="'. $datum . '"></td></tr>';
+            echo '<tr><td><input type="text" readonly name="datum" value="'. $datum . '"></td></tr>';
             echo" <tr><td> <input type='text' name='onderwerp' placeholder='Onderwerp'/></td>";
             echo" <tr><td> <input type='text' name='opmerkingen' placeholder='Eventuele opmerkingen'/></td>";
             echo '<td><input type="checkbox"  name="aanwezigheid[]" value=" '. $datum . ' ">Aanwezig</td></tr>';

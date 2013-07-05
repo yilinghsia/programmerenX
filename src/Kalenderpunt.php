@@ -12,7 +12,7 @@ class Kalenderpunt {
     /** @Id @Column(type="integer") @GeneratedValue  * */
     protected $id;
 
-    /** @Column(type="datetime", nullable=false)* */
+    /** @Column(type="string", nullable=false)* */
     protected $Datum;
 
     /** @Column(type="string", length=45, nullable=false)* */
@@ -35,15 +35,15 @@ class Kalenderpunt {
         $this->id = $id;
     }
 
-    public function getLoginnaam() {
-        return $this->Loginnaam;
+    public function getDatum() {
+        return $this->Datum;
     }
 
-    public function setLoginnaam($Loginnaam) {
-        $this->Loginnaam = $Loginnaam;
+    public function setDatum($Datum) {
+        $this->Datum = $Datum;
     }
 
-    public function getNaam() {
+        public function getNaam() {
         return $this->Naam;
     }
 
