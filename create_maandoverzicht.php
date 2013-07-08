@@ -18,21 +18,12 @@ if (!isset($_SESSION['loginnaam'])) {
         include('navigatieMenu.php');
         ?>
         <div id="content">
+                        <a href="create_kalenderpunt.php"> Maak nieuwe punt aan</a>
             <?php
-            $huidigeDag = date('Y-m-d');
-            $dql = "SELECT k FROM Kalenderpunt k WHERE k.Datum='$huidigeDag'";
-            $query = $entityManager->createQuery($dql)
-                    ->getResult();
 
-            foreach ($query AS $gebruiker) {
-                $gebruikerId = $gebruiker->getNaam();
-
-                echo $gebruikerId;
-            }
-
-            function draw_calendar($month, $year) {
+            function draw_calendar($month, $year, $events = array()) {
                 /* draw table */
-                $calendar = '<table cellpadding="0" cellspacing="5" class="calendar">';
+                $calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
 
                 /* table headings */
                 $headings = array('Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag');
@@ -57,16 +48,23 @@ if (!isset($_SESSION['loginnaam'])) {
 
                 /* keep going with days.... */
                 for ($list_day = 1; $list_day <= $days_in_month; $list_day++):
-                    $calendar.= '<td class="calendar-day">';
+                    $calendar.= '<td class="calendar-day"><div style="position:relative;height:100px;">';
                     /* add in the day number */
+                    if ($list_day < 10) {
+                        $list_day = str_pad($list_day, 2, '0', STR_PAD_LEFT);
+                    }
+            
                     $calendar.= '<div class="day-number">' . $list_day . '</div>';
 
-
-                    /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! * */
-
-                    $calendar.= str_repeat('<p></p>', 1);
-
-                    $calendar.= '</td>';
+                    $event_day = $year . '-' . $month . '-' . $list_day;
+                    if (isset($events[$event_day])) {
+                        foreach ($events[$event_day] as $event) {
+                            $calendar.= '<a href="kalenderpunt_info.php">' . $event['Naam'] . '</a>';
+                        }
+                    } else {
+                        $calendar.= str_repeat('<p></p>', 2);
+                    }
+                    $calendar.= '</div></td>';
                     if ($running_day == 6):
                         $calendar.= '</tr>';
                         if (($day_counter + 1) != $days_in_month):
@@ -97,11 +95,30 @@ if (!isset($_SESSION['loginnaam'])) {
                 return $calendar;
             }
 
+            /* date settings */
             $currentDate = date('F Y');
-            $maandnummer = date('m', strtotime($currentDate));
-            $jaarnummer = date('Y', strtotime($currentDate));
+            $month = date('m', strtotime($currentDate));
+            $year = date('Y', strtotime($currentDate));
+            
+
+            /* haal alle events op voor de maand */
+            $events = array();
+            $host = "localhost";
+            $username = "root";
+            $password = "";
+            $db_name = "studentenhuis";
+            $con = mysql_connect($host, $username, $password);
+            $db_link = mysql_select_db($db_name, $con);
+
+            $sql = "SELECT Naam,Datum AS Datum FROM Kalenderpunt WHERE Datum LIKE '$year-$month%'";
+            $result = mysql_query($sql, $con) or die('lukt niet' . mysql_error());
+            while ($row = mysql_fetch_assoc($result)) {
+                $events[$row['Datum']][] = $row;
+                
+            }
             echo "<h2>" . $currentDate . "</h2>";
-            echo draw_calendar($maandnummer, $jaarnummer);
+            
+            echo draw_calendar($month, $year, $events);
             ?>
-            <a href="create_kalenderpunt.php"> Maak nieuwe punt aan</a>
+
         </div>  
