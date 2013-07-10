@@ -1,5 +1,5 @@
 <?php
-header( "refresh:4;url=overzicht.php" );
+header( "refresh:4;url=Overzicht.php" );
 require_once "Bootstrap.php";
 require 'src/Persoon.php';
 

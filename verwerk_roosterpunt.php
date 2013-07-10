@@ -1,4 +1,6 @@
 <?php
+header("refresh:4;url=create_aanwezig.php");
+
 require_once "Bootstrap.php";
 require 'src/PersoonRoosterpunt.php';
 require 'src/Persoon.php';
@@ -14,33 +16,19 @@ $query = $entityManager->createQuery($dql)
 foreach ($query AS $gebruiker) {
     $gebruikerId = $gebruiker->getId();
 }
-$persoonId = $entityManager->getRepository('Persoon')->find($gebruikerId);
 
-$datum = $_POST['datum'];
 $aanwezig = $_POST['aanwezigheid'];
 
-foreach ($datum as $datumUpdate) {
+foreach ($aanwezig as $datumUpdate) {
     $roosterpunt = new PersoonRoosterpunt();
     $roosterpunt->setOnderwerp($_POST['onderwerp']);
     $roosterpunt->setBeschrijving($_POST['opmerkingen']);
-    $roosterpunt->setPersoon_id($persoonId);
+    $roosterpunt->setPersoon_id($gebruikerId);
     $roosterpunt->setDatum($datumUpdate);
-     /** foreach ($aanwezig as $aanwezigDag) {
-      if (isset($aanwezigDag)) {
-            $dql2 = "UPDATE PersoonRoosterpunt r SET r.Aanwezig = '1' WHERE r.Datum='$datum'";
-            $roosterpunt->setAanwezig($dql2);
-        } else {
-            $roosterpunt->setAanwezig('0');
-        }
-   echo $aanwezigDag;
-        }**/
-if(!isset ($aanwezig)){
-        $roosterpunt->setAanwezig("0");
-    }
-    echo $datumUpdate;
-    echo $aanwezig;
+    $roosterpunt->setAanwezig('1');
+
     
-   // $entityManager->persist($roosterpunt);
-   // $entityManager->flush();
+    $entityManager->persist($roosterpunt);
+    $entityManager->flush();
 } echo 'Rooster is verstuurd! Je wordt binnen een paar seconden terug gebracht';
 ?>

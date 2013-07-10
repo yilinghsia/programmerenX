@@ -24,57 +24,64 @@ if (!isset($_SESSION['loginnaam'])) {
             $dql = "SELECT g FROM Persoon g WHERE g.Loginnaam='$naamInSession'";
             $query = $entityManager->createQuery($dql)
                     ->getResult();
-            foreach ($query AS $gebruiker) {
-                $gebruikerId = $gebruiker->getId();
+           
+                foreach ($query AS $gebruiker) {
+                    $gebruikerId = $gebruiker->getId();
+                }
+
+                $dqlTransactie = "SELECT t FROM Transactie t WHERE t.Ontvanger_id='$gebruikerId'";
+                $queryTransactie = $entityManager->createQuery($dqlTransactie)
+                        ->getResult();
+                 if ($queryTransactie != NULL) {
+                ?>
+                <form method='post' action='updateTransactie.php'>
+                    <table border="0" width="100%">
+                        <tr>
+                            <td><h3>Verzender</h3></td>
+                            <td><h3>Bedrag</h3></td>
+                            <td><h3>Datum</h3></td>
+                            <td><h3>Eventueel commentaar</h3></td>
+                            <td><h3>Afgerond</h3></td>
+
+                        </tr>
+                        <tr>
+                            <td><?php
+                                foreach ($queryTransactie as $transactie) {
+                                    echo $transactie->getVerzender_id()->getNaam() . "</br>";
+                                }
+                                ?></td>
+                            <td>
+                                <?php
+                                foreach ($queryTransactie as $transactie) {
+                                    $transactieId = $transactie->getId();
+                                    echo " &euro;" . $transactie->getBedrag() . "<br>";
+                                }
+                                ?></td>
+                            <td><?php
+                                foreach ($queryTransactie as $mail) {
+                                    echo $transactie->getDatum() . "</br>";
+                                }
+                                ?></td>
+                            <td><?php
+                                foreach ($queryTransactie as $transactie) {
+                                    echo $transactie->getOpmerking() . "</br>";
+                                }
+                                ?></td>
+                            <td><?php
+                                foreach ($queryTransactie as $transactie) {
+                                    $transactieId = $transactie->getId();
+                                    echo '<input type="checkbox" name="transactieId[]" value="' . $transactieId . '"/> <br>';
+                                }
+                                ?></td>
+                        </tr>
+                        <tr><td><input type="submit" name="submit" value="Verwerk"/></td></tr>
+                    </table>
+                </form>
+            <?php
+            } else {
+                echo '</br></br>Je hebt geen transacties. Ga lekker winkelen!';
             }
-
-            $dqlTransactie = "SELECT t FROM Transactie t WHERE t.Ontvanger_id='$gebruikerId'";
-            $queryTransactie = $entityManager->createQuery($dqlTransactie)
-                    ->getResult();
             ?>
-            <form method='post' action='updateTransactie.php'>
-                <table border="0" width="100%">
-                    <tr>
-                        <td><h3>Verzender</h3></td>
-                        <td><h3>Bedrag</h3></td>
-                        <td><h3>Datum</h3></td>
-                        <td><h3>Eventueel commentaar</h3></td>
-                        <td><h3>Afgerond</h3></td>
-
-                    </tr>
-                    <tr>
-                        <td><?php
-                            foreach ($queryTransactie as $transactie) {
-                                echo $transactie->getVerzender_id()->getNaam() . "</br>";
-                            }
-                            ?></td>
-                        <td>
-                            <?php
-                            foreach ($queryTransactie as $transactie) {
-                                $transactieId = $transactie->getId();
-                                echo " &euro;" . $transactie->getBedrag() . "<br>";
-                            }
-                            ?></td>
-                        <td><?php
-                            foreach ($queryTransactie as $mail) {
-                                echo $transactie->getDatum() . "</br>";
-                            }
-                            ?></td>
-                        <td><?php
-                            foreach ($queryTransactie as $transactie) {
-                                echo $transactie->getOpmerking() . "</br>";
-                            }
-                            ?></td>
-                        <td><?php
-                            foreach ($queryTransactie as $transactie) {
-                                $transactieId = $transactie->getId();
-                                echo '<input type="checkbox" name="transactieId[]" value="' . $transactieId . '"/> <br>';
-                            }
-                            ?></td>
-                    </tr>
-                    <tr><td><input type="submit" name="submit" value="Verwerk"/></td></tr>
-                </table>
-            </form>
         </div>
     </body>
 </html>

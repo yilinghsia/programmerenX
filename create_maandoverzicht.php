@@ -20,7 +20,14 @@ if (!isset($_SESSION['loginnaam'])) {
         <div id="content">
             <a href="create_kalenderpunt.php"> Maak nieuwe punt aan</a>
             <?php
+            $naamInSession = $_SESSION['loginnaam'];
+            $dql = "SELECT g FROM Persoon g WHERE g.Loginnaam='$naamInSession'";
+            $query = $entityManager->createQuery($dql)
+                    ->getResult();
 
+            foreach ($query AS $gebruiker) {
+                $gebruikerId = $gebruiker->getId();
+            }
             function draw_calendar($month, $year, $events = array()) {
                 /* draw table */
                 $calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
@@ -61,7 +68,6 @@ if (!isset($_SESSION['loginnaam'])) {
                         foreach ($events[$event_day] as $event) {
 
                             $calendar.= '<a href="kalenderpunt_info.php?id=' . $event['id'] . '">' . $event['Naam'] . '</a>';
-                 
                         }
                     } else {
                         $calendar.= str_repeat('<p></p>', 2);
@@ -112,7 +118,7 @@ if (!isset($_SESSION['loginnaam'])) {
             $con = mysql_connect($host, $username, $password);
             $db_link = mysql_select_db($db_name, $con);
 
-            $sql = "SELECT id,Naam,Persoon_id_id,Datum AS Datum FROM Kalenderpunt WHERE Datum LIKE '$year-$month%'";
+            $sql = "SELECT id,Naam,Persoon_id_id,Datum AS Datum FROM Kalenderpunt WHERE Datum LIKE '$year-$month%' AND Persoon_id_id='$gebruikerId'";
 
             $result = mysql_query($sql, $con) or die('lukt niet' . mysql_error());
             while ($row = mysql_fetch_assoc($result)) {

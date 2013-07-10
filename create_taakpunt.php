@@ -37,7 +37,7 @@ if (!isset($_SESSION['loginnaam'])) {
                 <table>
                     <tr><td>
                             <select name='ontvanger'>
-                                <option value="" disabled selected>Kies een persoon</option>
+                                <option value=""  disabled selected>Kies een persoon</option>
                                 <?php
                                 foreach ($query2 as $bewoners) {
                                     echo'<option value="' . $bewoners->getId() . '">'
@@ -48,13 +48,13 @@ if (!isset($_SESSION['loginnaam'])) {
                             </select>
                         </td></tr>
                     <tr>
-                        <td><input type="date" name="begindatum" required/> begindatum</td>
+                        <td><input type="date" name="begindatum" class="rounded" required/> begindatum</td>
                     </tr>
                     <tr>
-                        <td><input type="date" name="einddatum" required/>einddatum</td>
+                        <td><input type="date" name="einddatum" class="rounded" required/>einddatum</td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="taakNaam" required placeholder="Titel van taakpunt"/></td>
+                        <td><input type="text" class="rounded" name="taakNaam" required placeholder="Titel van taakpunt"/></td>
                     </tr>
                     <tr>
                     <select name="takensoort">
