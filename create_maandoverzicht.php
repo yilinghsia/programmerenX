@@ -18,7 +18,7 @@ if (!isset($_SESSION['loginnaam'])) {
         include('navigatieMenu.php');
         ?>
         <div id="content">
-                        <a href="create_kalenderpunt.php"> Maak nieuwe punt aan</a>
+            <a href="create_kalenderpunt.php"> Maak nieuwe punt aan</a>
             <?php
 
             function draw_calendar($month, $year, $events = array()) {
@@ -53,13 +53,15 @@ if (!isset($_SESSION['loginnaam'])) {
                     if ($list_day < 10) {
                         $list_day = str_pad($list_day, 2, '0', STR_PAD_LEFT);
                     }
-            
+
                     $calendar.= '<div class="day-number">' . $list_day . '</div>';
 
                     $event_day = $year . '-' . $month . '-' . $list_day;
                     if (isset($events[$event_day])) {
                         foreach ($events[$event_day] as $event) {
-                            $calendar.= '<a href="kalenderpunt_info.php">' . $event['Naam'] . '</a>';
+
+                            $calendar.= '<a href="kalenderpunt_info.php?id=' . $event['id'] . '">' . $event['Naam'] . '</a>';
+                 
                         }
                     } else {
                         $calendar.= str_repeat('<p></p>', 2);
@@ -99,7 +101,7 @@ if (!isset($_SESSION['loginnaam'])) {
             $currentDate = date('F Y');
             $month = date('m', strtotime($currentDate));
             $year = date('Y', strtotime($currentDate));
-            
+
 
             /* haal alle events op voor de maand */
             $events = array();
@@ -110,14 +112,15 @@ if (!isset($_SESSION['loginnaam'])) {
             $con = mysql_connect($host, $username, $password);
             $db_link = mysql_select_db($db_name, $con);
 
-            $sql = "SELECT Naam,Datum AS Datum FROM Kalenderpunt WHERE Datum LIKE '$year-$month%'";
+            $sql = "SELECT id,Naam,Persoon_id_id,Datum AS Datum FROM Kalenderpunt WHERE Datum LIKE '$year-$month%'";
+
             $result = mysql_query($sql, $con) or die('lukt niet' . mysql_error());
             while ($row = mysql_fetch_assoc($result)) {
                 $events[$row['Datum']][] = $row;
-                
             }
+
             echo "<h2>" . $currentDate . "</h2>";
-            
+
             echo draw_calendar($month, $year, $events);
             ?>
 

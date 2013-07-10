@@ -33,31 +33,40 @@ if (!isset($_SESSION['loginnaam'])) {
             $query2 = $entityManager->createQuery($dql2)
                     ->getResult();
             ?>
-            <form method="post" action="verwerk_kalenderpunt.php">
+            <form method="post" action="verwerk_taakpunt.php">
                 <table>
                     <tr><td>
-
+                            <select name='ontvanger'>
+                                <option value="" disabled selected>Kies een persoon</option>
+                                <?php
+                                foreach ($query2 as $bewoners) {
+                                    echo'<option value="' . $bewoners->getId() . '">'
+                                    . $bewoners->getNaam();
+                                    echo '</option>';
+                                }
+                                ?>
+                            </select>
                         </td></tr>
                     <tr>
-                        <td><input type="date" name="datum" required/></td>
+                        <td><input type="date" name="begindatum" required/> begindatum</td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="taakNaam" required placeholder="Titel van kalenderpunt"/></td>
+                        <td><input type="date" name="einddatum" required/>einddatum</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="taakNaam" required placeholder="Titel van taakpunt"/></td>
                     </tr>
                     <tr>
                     <select name="takensoort">
                         <option value="" disabled selected>Kies een categorie</option>
-                        <option value="taak">Afspraak</option>
-                        <option value="afspraak">School</option>
-                        <option value="werk">Bijbaan/werk</option>
-                        <option value="overig">Overig</option>
-
-                    </select>
+                        <option value="taak">Taak</option>
+                        <option value="afspraak">Afspraak</option>
+                        <option value="overig">Overig</option></select>
                     </tr>
                     <tr>
                         <td><textarea rows="10" cols="50" class="rounded" name="beschrijving" placeholder="Beschrijving van de taak"></textarea></td>
                     </tr>
-                    <tr><td><input type="submit" name="submit" value="Sla kalenderpunt op"></td></tr>
+                    <tr><td><input type="submit" name="submit" value="Sla taakpunt op"></td></tr>
                 </table>
             </form>
         </div>

@@ -14,7 +14,7 @@
                 <li class='last'><a href='create_transactie.php'><span>Nieuwe transactie</span></a></li>
             </ul>
         </li>
-        <li class='last'><a href='create_maandoverzicht.php'><span>Maand overzicht</span></a></li>
+        <li class='last'><a href='create_maandoverzicht.php'><span>Persoonlijke kalender</span></a></li>
     </ul>
 </div>
 <?php
